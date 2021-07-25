@@ -83,6 +83,15 @@ prediction_prices = model.predict(x_test)
 prediction_prices = scaler.inverse_transform(prediction_prices)
 
 
+real_data = [model_inputs[len(model_inputs) + 1 - prediction_days:len(model_inputs + 1), 0]]
+real_data = np.array(real_data)
+real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1))
+
+prediction = model.predict(real_data)
+prediction = scaler.inverse_transform(prediction)
+print(f'Prediction: {prediction}')
+
+
 
 plt.plot(actual_prices, color='black', label=f'Actual  Price')
 plt.plot(prediction_prices, color='green', label=f'Predicted  Price')
